@@ -1,0 +1,83 @@
+/* 古地球 —— 大陆漂移时间机 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  background: radial-gradient(ellipse at 50% -20%, #0d2036 0%, #01040a 60%);
+  color: #d7ecf7;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#paleo-globe { position: fixed; inset: 0; width: 100vw; height: 100vh; cursor: grab; }
+#paleo-globe:active { cursor: grabbing; }
+
+header { position: fixed; top: 16px; left: 18px; z-index: 5; }
+header h1 {
+  font-size: 19px; font-weight: 900; letter-spacing: .12em; color: #f2fbff;
+  text-shadow: 0 0 20px rgba(120, 210, 255, .4);
+}
+header .sub { font-size: 11px; letter-spacing: .18em; color: rgba(160, 205, 226, .6); margin-top: 4px; }
+
+/* ---------- 左侧信息面板 ---------- */
+#panel {
+  position: fixed; left: 16px; top: 76px; z-index: 5;
+  width: min(330px, calc(100vw - 32px));
+  display: flex; flex-direction: column; gap: 10px;
+}
+.era-block, .city-block {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(2, 12, 24, .55);
+  border: 1px solid rgba(140, 220, 255, .16);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .4);
+}
+.era-ma { font-size: 24px; font-weight: 900; color: #f2fbff; font-variant-numeric: tabular-nums; }
+.era-name { font-size: 14px; font-weight: 800; color: #ffd27a; margin: 3px 0 5px; letter-spacing: .08em; }
+.era-note { font-size: 12px; line-height: 1.7; color: rgba(190, 220, 236, .75); }
+
+.city-block .k { display: block; margin-bottom: 6px; }
+.city-block select {
+  width: 100%; font: inherit; font-size: 13.5px;
+  color: #eaf7ff; background: rgba(4, 20, 36, .7);
+  border: 1px solid rgba(140, 220, 255, .3); border-radius: 9px;
+  padding: 7px 10px; outline: none;
+}
+.paleo-info { margin-top: 9px; }
+.paleo-lat { font-size: 26px; font-weight: 900; color: #bfeaff; font-variant-numeric: tabular-nums; }
+.paleo-desc { font-size: 12px; line-height: 1.7; color: rgba(190, 220, 236, .78); }
+.paleo-desc b { color: #ffd27a; }
+.paleo-loading { font-size: 12px; color: rgba(160, 205, 226, .5); margin-top: 8px; }
+
+/* ---------- 时间控制 ---------- */
+.time-block {
+  padding: 12px 16px 14px;
+  border-radius: 14px;
+  background: rgba(2, 12, 24, .55);
+  border: 1px solid rgba(140, 220, 255, .16);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.ctl {
+  cursor: pointer; font: inherit; font-size: 12.5px;
+  color: #ffd27a; letter-spacing: .04em;
+  background: rgba(255, 210, 122, .1);
+  border: 1px solid rgba(255, 210, 122, .4);
+  border-radius: 9px; padding: 6px 14px; margin-bottom: 10px;
+}
+.ctl:hover { background: rgba(255, 210, 122, .2); }
+.time-block input[type='range'] { width: 100%; accent-color: #ffd27a; }
+.time-scale { display: flex; justify-content: space-between; font-size: 10.5px; color: rgba(160, 205, 226, .55); margin-top: 4px; }
+
+footer {
+  position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%);
+  z-index: 5; font-size: 10.5px; color: rgba(160, 205, 226, .4); white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  #panel { width: calc(100vw - 24px); left: 12px; top: 68px; }
+  header { left: 12px; top: 12px; }
+  footer { display: none; }
+}
