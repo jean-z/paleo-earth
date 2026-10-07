@@ -23,11 +23,14 @@ export default function GlobeCanvas({ ref }) {
     const resize = () => {
       const dpr = Math.min(devicePixelRatio || 1, 2);
       const w = window.innerWidth, h = window.innerHeight;
+      const mobile = w <= 720;
       st.w = w; st.h = h;
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      st.cx = w / 2; st.cy = h / 2;
-      st.R = Math.min(w, h) * 0.44 * st.scale;
+      st.cx = w / 2;
+      // 移动端：底部抽屉占据下方约 38%，地球重心上移
+      st.cy = h * (mobile ? 0.40 : 0.5);
+      st.R = Math.min(w, h) * (mobile ? 0.42 : 0.44) * st.scale;
       redraw();
     };
     window.addEventListener('resize', resize);

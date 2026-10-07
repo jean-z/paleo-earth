@@ -77,7 +77,35 @@ footer {
 }
 
 @media (max-width: 720px) {
-  #panel { width: calc(100vw - 24px); left: 12px; top: 68px; }
-  header { left: 12px; top: 12px; }
+  /* 面板变底部抽屉，地球重心上移（JS 配合 cy 偏移） */
+  #panel {
+    left: 0; right: 0; top: auto; bottom: 0;
+    width: 100%;
+    gap: 8px;
+    padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+    border-radius: 18px 18px 0 0;
+    background: rgba(2, 12, 24, .78);
+  }
+  .era-block, .city-block, .time-block {
+    padding: 9px 12px;
+    border-radius: 12px;
+    background: rgba(4, 20, 36, .5);
+    border: none;
+  }
+  .era-ma { font-size: 17px; display: inline; }
+  .era-name { display: inline; font-size: 12.5px; margin: 0 0 0 8px; }
+  .era-note { font-size: 11px; margin-top: 4px; }
+  .city-block select { font-size: 13px; padding: 6px 9px; }
+  .paleo-lat { font-size: 21px; display: inline; margin-right: 8px; }
+  .paleo-desc { display: inline; font-size: 11.5px; }
+  .paleo-info { margin-top: 6px; }
+  .ctl { padding: 5px 12px; margin-bottom: 0; margin-right: 10px; }
+  .time-block { display: flex; align-items: center; gap: 10px; }
+  .time-block .ctl { flex: none; }
+  .time-block input[type='range'] { flex: 1; }
+  .time-scale { margin: 2px 0 0 2px; }
+  header { left: 12px; top: 10px; }
+  header h1 { font-size: 15px; }
+  header .sub { font-size: 10px; }
   footer { display: none; }
 }
