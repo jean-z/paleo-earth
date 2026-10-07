@@ -15,9 +15,9 @@ export default function App() {
   const city = CITIES.find((c) => c.id === cityId)
   const eraText = epoch.ma === 0 ? '今天' : `${epoch.era} · ${epoch.ma} Ma`
 
-  /* 载入城市漂移轨迹 */
+  /* 载入城市漂移轨迹（BASE_URL 兼容 GitHub Pages 子路径部署） */
   useEffect(() => {
-    fetch('/data/trajectories.json').then((r) => r.json()).then(setTraj).catch(() => {})
+    fetch(`${import.meta.env.BASE_URL}data/trajectories.json`).then((r) => r.json()).then(setTraj).catch(() => {})
   }, [])
 
   /* 纪元切换：按需加载海岸线 */
@@ -26,7 +26,7 @@ export default function App() {
     const cached = cache.current.get(T)
     if (cached) { globeRef.current?.setEpoch(cached, eraText); return }
     setLoaded(false)
-    fetch(`/data/coastlines-${T}.json`)
+    fetch(`${import.meta.env.BASE_URL}data/coastlines-${T}.json`)
       .then((r) => r.json())
       .then((j) => { cache.current.set(T, j); setLoaded(true); globeRef.current?.setEpoch(j, eraText) })
       .catch(() => setLoaded(true))
